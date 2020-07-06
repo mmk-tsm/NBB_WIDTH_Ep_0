@@ -171,6 +171,9 @@
 // weights using the remaining weight after regrind.
 // also subtract off the regrind weight to know how much of the batch
 // is left.
+
+// M.McKiernan                          06-07-2020
+// testing Git no real change.
 //////////////////////////////////////////////////////
 
 //*****************************************************************************
@@ -216,6 +219,7 @@ extern  structSetpointData  g_CurrentRecipe;
 void CalculateWeightAfterRegrind( void )
 {
 int nRegCompNo,nCompIndex;
+int i;
 float fRefWeight;
 
         nRegCompNo = (int)(g_cSeqTable[0] & 0x0F);  // get component no. from table, first position
