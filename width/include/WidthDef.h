@@ -1,0 +1,204 @@
+// P.Smith                          7/7/10
+// added LAST_WIDTH_MODE,LAST_WIDTH_TYPE,LAST_LINE_TYPE
+// define NUMBER_OF_ULTRASONICS_SENSORS,REFERENCE_SENSOR_NUMBER               (4)
+// REFERENCE_SENSOR_PER_DEVIATION_ALLOWED,SENSOR_PER_DEVIATION_ALLOWED
+// MAX_ULTRASONIC_DEVIATIONS_ALLOWED
+// add all max and default definitions for width control
+//
+// P.Smith                          9/7/10
+// added CRYOVAC_TO_MANUAL_ALARM_TIMEOUT
+//
+// P.Smith                          19/7/10
+// added POSITIVE_SIGN & NEGATIVE_SIGN
+// change THETHA_FOR_WIDTH_CONTROL to 251425
+// change MINIMUM_FAST_CORRECTION_LIMIT to 10
+//
+// P.Smith                          16/9/10
+// added MAX_CAL_LAYFLAT_FROM_US_INTERVAL,DEFAULT_CAL_LAYFLAT_FROM_US_INTERVAL  (20)
+// added MAX_CAL_LAYFLAT_FROM_US_SAMPLE_NO,DEFAULT_CAL_LAYFLAT_FROM_US_SAMPLE_NO (10)
+//
+// P.Smith                          10/6/11
+// define MINIMUM_WIDTH_FOR_SMALL_LINE as 2mm
+/////////////////////////////////////////////////
+
+//*****************************************************************************
+// MACROS
+//*****************************************************************************
+#ifndef __WIDTHDEF_H__
+#define __WIDTHDEF_H__
+
+#include "General.h"
+#include <basictypes.h>
+
+#define	POSITIVE_SIGN						(0)
+#define	NEGATIVE_SIGN						(1)
+
+
+
+#define	STEPPER_MOTOR_MM_CONVERSION_FACTOR	(5.98802f)
+#define	INITIATE_ACTION_CODE				(0xA5)
+
+#define	SSIFLEFTSENSORLIMITBITPOS	   		(0x04)
+#define	SSIFRIGHTSENSORLIMITBITPOS	   		(0x08)
+
+#define	SSIFLEFTSENSORMASKPOS	        	(0x0300)
+#define	SSIFLEFTSSENSOREDGECODE     	   	(0x0100)
+#define	SSIFLEFTSENSORCOVEREDCODE     	   	(0x0300)
+#define	SSIFLEFTSENSORUNCOVEREDCODE     	(0x0000)
+
+
+#define	SSIFRIGHTSENSORMASKPOS	        	(0x3000)
+#define	SSIFRIGHTSSENSOREDGECODE     	   	(0x1000)
+#define	SSIFRIGHTSENSORCOVEREDCODE     	   	(0x3000)
+#define	SSIFRIGHTSENSORUNCOVEREDCODE     	(0x0000)
+
+#define	SSIFLEFTSENSORTRACKINGBITPOS		(0x0002)
+#define	SSIFRIGHTSENSORTRACKINGBITPOS		(0x0010)
+
+#define	SSIFLEFTMOTORTRACKINGBITPOS		    (0x0004)
+#define	SSIFLEFTMOTORONEDGEBITPOS		    (0x0008)
+#define	SSIFLEFTMOTORSTANDARDISINGBITPOS    (0x0010)
+
+#define	SSIFRIGHTMOTORTRACKINGBITPOS		(0x0020)
+#define	SSIFRIGHTMOTORONEDGEBITPOS		    (0x0040)
+#define	SSIFRIGHTMOTORSTANDARDISINGBITPOS   (0x0080)
+
+#define	SSIFRIGHTANDLEFTSTANDARDISEBITPOS   (0x8800)
+
+
+
+#define	SENSOR_UNCOVERED					(1)
+#define	SENSOR_AT_EDGE						(2)
+#define	SENSOR_COVERED						(3)
+
+
+#define	MOTOR_TRACKING						(1)
+#define	MOTOR_AT_EDGE						(2)
+
+//Blender Modes
+
+#define	LAYFLAT_MODE						(0)
+#define	ULTRASONIC_MODE						(1)
+#define	ULTRASONIC_AND_LAYFLAT_MODE			(2)
+#define	LAST_WIDTH_MODE						ULTRASONIC_AND_LAYFLAT_MODE
+
+// Width Control Type
+#define	STANDARD_TYPE						(0)
+#define	SMALL_LINE_TYPE						(1)
+#define	LAST_WIDTH_TYPE  					SMALL_LINE_TYPE
+
+
+// line type
+#define	BLOWN_FILM_LINE_TYPE				(0)
+#define	IBC_LINE_TYPE					    (1)
+#define	CRYOVAC_LINE_TYPE				    (2)
+#define	LAST_LINE_TYPE						CRYOVAC_LINE_TYPE
+
+
+#define	CONTROL_AVERAGE_SAMPLES		        (20)
+//#define	CONTROL_AVERAGE_SAMPLES		        (100)
+#define	RAPID_INTEGRATION_SAMPLE_TIME       (5)
+
+// definition of width sequence
+//
+#define	NO_SEQUENCE       					(0)
+#define	WIDTH_INTEGRATION_SEQUENCE          (1)
+#define	WIDTH_CORRECTING_SEQUENCE           (2)
+#define	WIDTH_PROCESS_DELAY_SEQUENCE        (3)
+
+//#define	THETHA_FOR_WIDTH_CONTROL   	        (0.00597132)
+#define	THETHA_FOR_WIDTH_CONTROL   	        (0.00251425)
+
+#define	STANDARDISE_SETTLE_PERIOD   	     (10)
+
+#define	CONTROL_IS_OFF			   	     	 (0)
+#define	CONTROL_IS_INCREASING   	     	 (1)
+#define	CONTROL_IS_DECREASING   	     	 (2)
+
+#define	NO_WIDTH_ALARM			   	     	  (0)
+#define	WIDTH_ERROR_OUTSIDE_SINGLE_ALARM_BAND (1)
+#define	WIDTH_ERROR_OUTSIDE_DOUBLE_ALARM_BAND (2)
+
+#define	MAX_CORRECTION_IN_ALARM 			  (4)
+#define	NUMBER_OF_ULTRASONICS_SENSORS 		  (4)
+#define	REFERENCE_SENSOR_NUMBER               (4)
+#define	REFERENCE_SENSOR_PER_DEVIATION_ALLOWED (10)
+#define	SENSOR_PER_DEVIATION_ALLOWED 		   (5)
+#define	MAX_ULTRASONIC_DEVIATIONS_ALLOWED	   (3)
+
+
+#define	PI               					  (3.1415926)
+
+#define	MAX_ALARM_LIMIT               		  (100)
+#define	DEFAULT_ALARM_LIMIT               	  (25)
+#define	MAX_PROCESS_DELAY              		  (1000)
+#define	DEFAULT_PROCESS_DELAY              	  (60)
+#define	MAX_INTEGRATION_TIME              	  (1000)
+#define	DEFAULT_INTEGRATION_TIME              (60)
+#define	MAX_WIDTH_DEADBAND              	  (100)
+#define	DEFAULT_WIDTH_DEADBAND                (1)
+
+#define	MAX_INCREASE_CONTROL_GAIN             (1000)
+#define	DEFAULT_INCREASE_CONTROL_GAIN         (15)
+#define	MAX_DECREASE_CONTROL_GAIN             (1000)
+#define	DEFAULT_DECREASE_CONTROL_GAIN         (15)
+#define	MAX_FAST_CORRECTION_CONTROL_GAIN      (1000)
+#define	DEFAULT_FAST_CORRECTION_CONTROL_GAIN  (15)
+#define	MAX_WIDTH_AVERAGING_IN_SECONDS        (15)
+#define	DEFAULT_WIDTH_AVERAGING_IN_SECONDS    (2)
+
+#define	MAX_ULTRASONIC_AVERAGING   			  (10)
+#define	DEFAULT_ULTRASONIC_AVERAGING   		  (6)
+
+#define	MAX_WIDTH_OVERRUN   		  		  (5)
+#define	DEFAULT_WIDTH_OVERRUN   		  	  (0)
+#define	MAX_WIDTH_OVERRUN_DEADBAND	  		  (5)
+#define	DEFAULT_WIDTH_OVERRUN_DEADBAND   	  (0)
+
+#define	MAX_CAL_LAYFLAT_FROM_US_INTERVAL	  (200)
+#define	DEFAULT_CAL_LAYFLAT_FROM_US_INTERVAL  (20)
+#define	MAX_CAL_LAYFLAT_FROM_US_SAMPLE_NO     (200)
+#define	DEFAULT_CAL_LAYFLAT_FROM_US_SAMPLE_NO (10)
+
+#define	MINIMUM_FAST_CORRECTION_LIMIT        (10)
+
+
+typedef	struct {
+                BOOL	m_bWidthControlDebug;
+ 	            } StructDebugWidth;
+
+
+#define	BUBBLE_BREAK_ACTIVE_TIME_PERIOD       (25) // 0.5 second
+#define	CRYOVAC_TO_MANUAL_ALARM_TIMEOUT       (600) // timeout in seconds
+#define	MINIMUM_WIDTH_FOR_SMALL_LINE          (2.0) // min wifth
+
+
+/*
+ * ;
+SSIFLIM1BITPOS          EQU     %0000000000000100       ; LIMIT 1
+SSIFLIM2BITPOS          EQU     %0000000000001000       ; LIMIT 2
+
+SSIFTRACKING1MASKPOS    EQU     %0000001100000000
+SSIFEDGE1CODE           EQU     %0000000100000000       ; AT EDGE
+SSIFCOVERED1CODE        EQU     %0000001100000000       ; COVERED
+
+SSIFTRACKING2MASKPOS    EQU     %0011000000000000
+SSIFEDGE2CODE           EQU     %0001000000000000       ; AT EDGE
+SSIFCOVERED2CODE        EQU     %0011000000000000       ; COVERED
+SSIFTRACKING1BITPOS     EQU     %0000000000000010       ; TRACKING 1
+SSIFTRACKING2BITPOS     EQU     %0000000000010000       ; TRACKING 2
+
+
+EDGESTATUSBITPOS        EQU     %00110011               ; EDGE STATUS BITS
+EDGESTATUSCODE          EQU     %00010001               ; EDGE CODE
+
+STANDARDISECOMMANDPOS   EQU     %0000000000000100       ; STANDARDISE COMMAND POSITION.
+
+
+
+ *
+ */
+
+
+
+#endif //__WIDTHDEF_H__
